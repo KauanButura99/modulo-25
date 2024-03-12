@@ -5,9 +5,9 @@ name: webdriverio-ci
 
 on:
   push:
-    branches: [ master ]
+    branches: [ exercicio-modulo26 ]
   pull_request:
-    branches: [ master ]
+    branches: [ exercicio-modulo26 ]
 
 jobs:
   test:
@@ -23,7 +23,7 @@ jobs:
         - name: Install
           run: npm install
         - name: Test
-          run: BROWSERSTACK_USERNAME=${{secrets.BROWSERSTACK_USERNAME}} BROWSERSTACK_ACCESS_KEY=${{secrets.BROWSERSTACK_ACCESS_KEY}} npm run test
+          run: BROWSERSTACK_USERNAME=${{secrets.BROWSERSTACK_USERNAME}} BROWSERSTACK_ACCESS_KEY=${{secrets.BROWSERSTACK_ACCESS_KEY}} npm run wdio
         - uses: actions/upload-artifact@v1
           continue-on-error: true
           if: failure()
