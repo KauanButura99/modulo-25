@@ -1,0 +1,25 @@
+name: WebDriverIO Test
+
+on:
+  push:
+    branches:
+      - main  # ajuste conforme necessário
+
+jobs:
+  test:
+    runs-on: ubuntu-latest  # ou outro sistema operacional de sua escolha
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Install Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run WebDriverIO tests
+      run:   npm run wdio
