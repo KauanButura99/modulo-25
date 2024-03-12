@@ -1,8 +1,13 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: webdriverio-ci
+
 on:
   push:
-    branches: [ exercicio-modulo26 ]
+    branches: [ master ]
   pull_request:
-    branches: [ exercicio-modulo26 ]
+    branches: [ master ]
 
 jobs:
   test:
@@ -18,9 +23,12 @@ jobs:
         - name: Install
           run: npm install
         - name: Test
-          run:  npm run wdio
+          run: BROWSERSTACK_USERNAME=${{secrets.BROWSERSTACK_USERNAME}} BROWSERSTACK_ACCESS_KEY=${{secrets.BROWSERSTACK_ACCESS_KEY}} npm run test
         - uses: actions/upload-artifact@v1
+          continue-on-error: true
           if: failure()
           with:
             name: logs
             path: logs
+      
+ 
